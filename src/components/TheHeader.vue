@@ -9,12 +9,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link
-              class="login btn btn-ranek btn-lg"
-              to="/login"
-              tag="button"
-              >Login</router-link
-            >
+            <router-link class="login btn btn-ranek btn-lg" to="/login" tag="button">Login</router-link>
           </li>
         </ul>
       </div>
