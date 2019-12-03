@@ -7,11 +7,11 @@
             <font-awesome-icon icon="chevron-left" />
           </router-link>
         </li>
-        <li class="page-item" v-for="(pagina) in  paginasTotal" :key="pagina">
-          <router-link class="proximo page-link" :to="{query: query(pagina)}">{{pagina}}</router-link>
+        <li class="page-item" v-for="(pagina) in  maximoPaginas" :key="pagina">
+          <router-link class="page-link" :to="{query: query(pagina)}">{{pagina}}</router-link>
         </li>
         <li class="page-item">
-          <router-link class="anterior page-link" :to="{query: query(proxima)}">
+          <router-link class="proximo page-link" :to="{query: query(proxima)}">
             <font-awesome-icon icon="chevron-right" />
           </router-link>
         </li>
@@ -40,14 +40,22 @@ export default {
     return {
       atual: this.$route.query._page,
       anterior: 0,
-      proxima: 0,
-      status: ""
+      proxima: 0
     };
   },
   computed: {
     paginasTotal() {
-      const totalPaginas = this.totalProdutos / this.limiteProdutos;
+      let totalPaginas = this.totalProdutos / this.limiteProdutos;
       return totalPaginas !== Infinity ? Math.ceil(totalPaginas) : 0;
+    },
+    maximoPaginas() {
+      const paginasArray = [];
+      for (let i = 1; i <= this.paginasTotal; i++) {
+        paginasArray.push(i);
+      }
+      paginasArray.splice(0, this.atual - 3);
+      paginasArray.splice(5, this.paginasTotal);
+      return paginasArray;
     }
   },
   methods: {
@@ -59,8 +67,6 @@ export default {
     },
     paginaAtual() {
       this.atual = this.$route.query._page;
-      this.paginaAnterior();
-      this.proximaPagina();
     },
     paginaAnterior() {
       if (this.atual > 1) {
@@ -83,6 +89,8 @@ export default {
   },
   updated() {
     this.paginaAtual();
+    this.paginaAnterior();
+    this.proximaPagina();
   }
 };
 </script>

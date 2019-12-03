@@ -2,7 +2,9 @@
   <div id="app">
     <TheHeader />
     <div id="main">
-      <router-view />
+      <transition mode="out-in">
+        <router-view />
+      </transition>
     </div>
     <TheFooter />
   </div>
@@ -29,8 +31,24 @@ body {
   background-image: url("../src/assets/pattern.svg");
 }
 
+a,
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
 .btn-ranek {
   background-color: #87f;
   color: white;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.75s;
 }
 </style>
