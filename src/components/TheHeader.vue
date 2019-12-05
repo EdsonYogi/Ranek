@@ -9,13 +9,30 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="login btn btn-ranek btn-lg" to="/login" tag="button">Login</router-link>
+            <router-link
+              class="login btn btn-ranek btn-lg"
+              v-if="$store.state.login"
+              to="/usuario"
+            >{{nome}}</router-link>
+            <router-link class="login btn btn-ranek btn-lg" v-else to="/login" tag="button">Login</router-link>
           </li>
         </ul>
       </div>
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  name: "TheHeader",
+  computed: {
+    nome() {
+      return this.$store.state.usuario.nome;
+    }
+  }
+};
+</script>
+
 
 <style scoped>
 .menu {

@@ -1,13 +1,26 @@
 <template>
   <div class="criar-conta my-5">
     <h2 class="text-center my-3">Crie a Sua Conta</h2>
-    <button type="submit" class="btn btn-ranek">Criar Conta</button>
+    <transition mode="out-in">
+      <button v-if="!criar" class="btn btn-ranek" @click="criar = true">Criar Conta</button>
+      <FormularioUsuario v-else />
+    </transition>
   </div>
 </template>
 
 <script>
+import FormularioUsuario from "@/components/FormularioUsuario.vue";
+
 export default {
-  name: "CriarConta"
+  name: "CriarConta",
+  components: {
+    FormularioUsuario
+  },
+  data() {
+    return {
+      criar: false
+    };
+  }
 };
 </script>
 
