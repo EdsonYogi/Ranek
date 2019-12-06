@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form class="cadastro-usuario col-6">
+    <form class="cadastro-usuario col-md-6 col-12">
       <div class="dados-cadastrais">
         <h1>Dados Cadastrais</h1>
         <div class="form-group">
@@ -9,11 +9,21 @@
         </div>
         <div class="form-group">
           <label for="email">E-Mail</label>
-          <input class="form-control" type="email" name="email" v-model="email" />
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            v-model="email"
+          />
         </div>
         <div class="form-group">
           <label for="senha">Senha</label>
-          <input class="form-control" type="password" name="senha" v-model="senha" />
+          <input
+            class="form-control"
+            type="password"
+            name="senha"
+            v-model="senha"
+          />
         </div>
       </div>
       <div class="endereco">
@@ -32,29 +42,57 @@
         <div class="row">
           <div class="form-group col-md-10 col-12">
             <label for="endereco">Endereço</label>
-            <input class="form-control" type="text" name="endereco" v-model="logradouro" />
+            <input
+              class="form-control"
+              type="text"
+              name="endereco"
+              v-model="logradouro"
+            />
           </div>
           <div class="form-group col-md-2 col-12">
             <label for="numero">Número</label>
-            <input class="form-control" type="text" name="numero" v-model="numero" />
+            <input
+              class="form-control"
+              type="text"
+              name="numero"
+              v-model="numero"
+            />
           </div>
         </div>
         <div class="row">
           <div class="form-group col-12">
             <label for="bairro">Bairro</label>
-            <input class="form-control" type="text" name="bairro" v-model="bairro" />
+            <input
+              class="form-control"
+              type="text"
+              name="bairro"
+              v-model="bairro"
+            />
           </div>
         </div>
         <div class="row">
           <div class="form-group col-md-10 col-12">
             <label for="cidade">Cidade</label>
-            <input class="form-control" type="text" name="cidade" v-model="cidade" />
+            <input
+              class="form-control"
+              type="text"
+              name="cidade"
+              v-model="cidade"
+            />
           </div>
           <div class="form-group col-md-2 col-12">
             <label for="estado">UF</label>
-            <input class="form-control" type="text" name="Estado" v-model="estado" />
+            <input
+              class="form-control"
+              type="text"
+              name="Estado"
+              v-model="estado"
+            />
           </div>
         </div>
+      </div>
+      <div>
+        <slot></slot>
       </div>
     </form>
   </section>

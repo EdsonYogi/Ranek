@@ -39,7 +39,13 @@ a:hover {
 
 .btn-ranek {
   background-color: #87f;
+  border: 3px solid #87f;
   color: white;
+}
+
+.btn-ranek:hover {
+  background-color: transparent;
+  color: #87f;
 }
 
 .v-enter,

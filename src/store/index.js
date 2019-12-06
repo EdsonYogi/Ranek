@@ -30,10 +30,29 @@ export default new Vuex.Store({
   },
   actions: {
     getUsuario(context, payload) {
-      api.get(`/usuario/${payload}`).then(response => {
+      return api.get(`/usuario/${payload}`).then(response => {
         context.commit("UPDATE_USUARIO", response.data);
         context.commit("UPDATE_LOGIN", true);
       });
+    },
+    cadastrarUsuario(context, payload) {
+      context.commit("UPDATE_USUARIO", { id: payload.email });
+      return api.post("/usuario", payload);
+    },
+    deslogarUsuario(context) {
+      context.commit("UPDATE_USUARIO", {
+        id: "",
+        nome: "",
+        email: "",
+        senha: "",
+        logradouro: "",
+        numero: "",
+        bairro: "",
+        cep: "",
+        cidade: "",
+        estado: ""
+      }),
+        context.commit("UPDATE_LOGIN", false);
     }
   },
   modules: {}

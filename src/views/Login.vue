@@ -8,13 +8,23 @@
         <form class="dados col-md-6 col-12 mx-auto">
           <div class="form-group">
             <label>Endereço de E-Mail</label>
-            <input type="email" class="form-control form-control-lg" v-model="login.email" />
+            <input
+              type="email"
+              class="form-control form-control-lg"
+              v-model="login.email"
+            />
           </div>
           <div class="form-group">
             <label>Senha</label>
-            <input type="password" class="form-control form-control-lg" v-model="login.senha" />
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              v-model="login.senha"
+            />
           </div>
-          <button class="btn btn-ranek" @click.prevent="logar">Logar</button>
+          <button class="btn btn-ranek" @click.prevent="logar">
+            Logar
+          </button>
           <div class="esqueci-senha text-center my-2">
             <a href="/">Esqueci minha senha</a>
           </div>
@@ -37,15 +47,14 @@ export default {
     return {
       login: {
         email: "",
-        senha: "",
-        id: "admin"
+        senha: ""
       }
     };
   },
   methods: {
     logar() {
-      this.$store.dispatch("getUsuario", this.login.id);
-      this.$route.push({ name: "usuario" });
+      this.$store.dispatch("getUsuario", this.login.email);
+      this.$router.push({ name: "usuario" });
     }
   }
 };

@@ -5,24 +5,32 @@
         <div class="row no-gutter justify-content-center">
           <router-link
             class="produto-link col-md-4 col-12 p-0"
-            :to="{name: 'produto', params: {id: produto.id}}"
+            :to="{ name: 'produto', params: { id: produto.id } }"
             v-for="produto in produtos"
             :key="produto.id"
           >
             <div class="produto-info p-3 m-3">
               <div class="img"></div>
-              <p class="preco">{{ produto.preco | conversaoPreco}}</p>
+              <p class="preco">{{ produto.preco | conversaoPreco }}</p>
               <h1 class="titulo text-truncate">{{ produto.produto }}</h1>
               <p class="descricao text-truncate">{{ produto.descricao }}</p>
             </div>
           </router-link>
         </div>
         <div class="row justify-content-center">
-          <Paginacao :limiteProdutos="limiteProdutos" :totalProdutos="totalProdutos" />
+          <Paginacao
+            :limiteProdutos="limiteProdutos"
+            :totalProdutos="totalProdutos"
+          />
         </div>
       </div>
-      <div v-else-if="produtos && produtos.length === 0" key="mensagem-resultado">
-        <p class="text-center">Nenhum resultado encontrado. Use palavras-chave diferentes.</p>
+      <div
+        v-else-if="produtos && produtos.length === 0"
+        key="mensagem-resultado"
+      >
+        <p class="text-center">
+          Nenhum resultado encontrado. Use palavras-chave diferentes.
+        </p>
       </div>
       <div class="row align-items-center" v-else key="loading-produtos">
         <Loading />
@@ -76,6 +84,9 @@ export default {
 </script>
 
 <style scoped>
+.lista-produtos {
+  min-height: calc(100vh - 125px);
+}
 .produto-link {
   max-width: 320px;
 }
