@@ -1,24 +1,14 @@
 <template>
-  <div class="usuario">
-    <b-navbar toggleable="lg" type="dark">
-      <b-navbar-toggle class="ml-auto" target="menu-usuario">
-        <font-awesome-icon icon="bars" />
-      </b-navbar-toggle>
-      <b-collapse class="justify-content-center" id="menu-usuario" is-nav>
-        <b-navbar-nav>
-          <b-nav-item :to="{ name: 'usuario' }">Produtos</b-nav-item>
-          <b-nav-item :to="{ name: 'venda' }">Vendas</b-nav-item>
-          <b-nav-item :to="{ name: 'compra' }">Compras</b-nav-item>
-          <b-nav-item :to="{ name: 'editar' }">Editar Perfil</b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+  <section class="usuario">
+    <div class="menu-usuario">
+      <div class="row"></div>
+    </div>
     <div class="pagina">
       <transition mode="out-in">
         <router-view></router-view>
       </transition>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -28,33 +18,16 @@ export default {
 </script>
 
 <style scoped>
-.usuario nav {
-  width: 100%;
-  height: 50px;
+.menu-usuario {
+  margin: 10px 30px;
+}
+.menu-usuario ul {
+  padding: 5px 10px;
+}
+
+.menu-usuario ul li {
+  margin: 5px 0;
   padding: 0;
-  background-color: #87f;
-}
-
-.usuario nav button {
-  border: 1px solid white;
-  color: white;
-  font-size: 1.5em;
-  margin: 7px 20px 7px 0;
-}
-
-#menu-usuario {
-  background-color: #87f;
-}
-
-#menu-usuario li {
-  text-align: right;
-  margin: 0 20px;
-}
-
-#menu-usuario a {
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
 }
 
 .pagina {

@@ -9,29 +9,30 @@
             </router-link>
           </li>
           <div class="row">
-            <li class="nav-item">
-              <router-link
-                class="logado btn btn-ranek btn-lg"
-                v-if="$store.state.login"
-                to="/usuario"
-                ><font-awesome-icon icon="user" /> {{ nome }}</router-link
-              >
-              <router-link
-                class="login btn btn-ranek btn-lg"
-                v-else
-                to="/login"
-                tag="button"
-                ><font-awesome-icon icon="user"
-              /></router-link>
-            </li>
-            <li class="ml-2" v-if="$store.state.login">
-              <button
-                class="deslogar btn btn-ranek btn-lg"
-                @click="deslogarUsuario"
-              >
-                <font-awesome-icon icon="sign-out-alt" />
-              </button>
-            </li>
+            <b-dropdown split text="Menu" class="m-md-2" to="/usuario" v-if="$store.state.login">
+              <b-dropdown-item>
+                <router-link :to="{ name: 'usuario' }">Produtos</router-link>
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <router-link :to="{ name: 'venda' }">Vendas</router-link>
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <router-link :to="{ name: 'compra' }">Compras</router-link>
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <router-link :to="{ name: 'editar' }">Editar Perfil</router-link>
+              </b-dropdown-item>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item @click="deslogarUsuario">
+                <div class="deslogar">
+                  <span>Logout</span>
+                  <font-awesome-icon icon="sign-out-alt" />
+                </div>
+              </b-dropdown-item>
+            </b-dropdown>
+            <router-link class="login btn btn-ranek btn-lg" v-else to="/login" tag="button">
+              <font-awesome-icon icon="user" />
+            </router-link>
           </div>
         </ul>
       </div>
@@ -80,21 +81,32 @@ nav {
 .login {
   font-size: 1.5em;
   text-transform: uppercase;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   padding: 0;
   border-radius: 50%;
+}
+
+#__BVID__17__BV_button_ > input[to="/usuario"] {
+  margin: 0;
 }
 
 .logado {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5em;
   width: 175px;
-  height: 50px;
+  height: 40px;
   padding: 0;
   border-radius: 5px;
+}
+
+.logado span {
+  font-size: 1em;
+}
+
+.logado svg {
+  font-size: 1.25em;
 }
 
 .logado svg {
@@ -102,6 +114,9 @@ nav {
 }
 
 .deslogar {
-  height: 50px;
+  color: #87f;
+}
+.deslogar svg {
+  margin-left: 10px;
 }
 </style>
