@@ -2,8 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import BootstrapVue from "bootstrap-vue";
-import PortalVue from "portal-vue";
 import Loading from "@/components/Loading.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -14,7 +12,10 @@ import {
   faBars,
   faSignInAlt,
   faSignOutAlt,
-  faUser
+  faUser,
+  faCaretDown,
+  faUserCircle,
+  faMinusSquare
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -24,11 +25,11 @@ library.add(
   faBars,
   faSignInAlt,
   faSignOutAlt,
-  faUser
+  faUser,
+  faCaretDown,
+  faUserCircle,
+  faMinusSquare
 );
-
-Vue.use(BootstrapVue);
-Vue.use(PortalVue);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.component("Loading", Loading);

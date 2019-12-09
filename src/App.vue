@@ -41,10 +41,12 @@ a:hover {
   background-color: #87f;
   border: 3px solid #87f;
   color: white;
+  transition-duration: 0.5s;
 }
 
 .btn-ranek:hover {
-  background-color: transparent;
+  background-color: white;
+  border: 3px solid #87f;
   color: #87f;
 }
 

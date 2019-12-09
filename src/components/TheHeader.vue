@@ -1,55 +1,59 @@
 <template>
   <header>
-    <nav>
-      <div class="container p-0">
-        <ul class="menu nav justify-content-between align-items-center px-3">
-          <li class="nav-item">
-            <router-link to="/">
-              <img class="logo" src="@/assets/ranek.svg" alt="logo" />
-            </router-link>
-          </li>
-          <div class="row">
-            <b-dropdown split text="Menu" class="m-md-2" to="/usuario" v-if="$store.state.login">
-              <b-dropdown-item>
-                <router-link :to="{ name: 'usuario' }">Produtos</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item>
-                <router-link :to="{ name: 'venda' }">Vendas</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item>
-                <router-link :to="{ name: 'compra' }">Compras</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item>
-                <router-link :to="{ name: 'editar' }">Editar Perfil</router-link>
-              </b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item @click="deslogarUsuario">
-                <div class="deslogar">
-                  <span>Logout</span>
-                  <font-awesome-icon icon="sign-out-alt" />
-                </div>
-              </b-dropdown-item>
-            </b-dropdown>
-            <router-link class="login btn btn-ranek btn-lg" v-else to="/login" tag="button">
-              <font-awesome-icon icon="user" />
-            </router-link>
-          </div>
-        </ul>
+    <div class="container">
+      <div class="cabecalho row">
+        <router-link class="logo" to="/">
+          <img src="@/assets/ranek.svg" alt="logo" />
+        </router-link>
+        <router-link class="login btn-ranek" to="/login" v-if="!$store.state.login">
+          <font-awesome-icon icon="user" />
+        </router-link>
+        <div v-else>
+          <button class="logado btn-ranek" @click="dropdownAction">
+            {{nome}}
+            <font-awesome-icon icon="caret-down" />
+          </button>
+          <ul class="dropdown-lista" v-if="dropdown">
+            <li>
+              <router-link class="btn-ranek" :to="{name: 'usuario'}">Produtos</router-link>
+            </li>
+            <li>
+              <router-link class="btn-ranek" :to="{name: 'venda'}">Vendas</router-link>
+            </li>
+            <li>
+              <router-link class="btn-ranek" :to="{name: 'compra'}">Compras</router-link>
+            </li>
+            <li>
+              <router-link class="btn-ranek" :to="{name: 'editar'}">Editar Perfil</router-link>
+            </li>
+            <li>
+              <button class="btn-ranek" to @click="deslogarUsuario ">Logout</button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </nav>
+    </div>
   </header>
 </template>
-
 <script>
 export default {
   name: "TheHeader",
+  data() {
+    return {
+      dropdown: false
+    };
+  },
   computed: {
     nome() {
       return this.$store.state.usuario.nome;
     }
   },
   methods: {
+    dropdownAction() {
+      this.dropdown = !this.dropdown;
+    },
     deslogarUsuario() {
+      this.dropdown = false;
       this.$store.dispatch("deslogarUsuario");
       this.$router.push("/login");
     }
@@ -58,65 +62,56 @@ export default {
 </script>
 
 <style scoped>
-nav {
-  background-color: transparent;
-  width: 100%;
-  height: 75px;
-  box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
-}
-
-.menu {
-  min-height: 75px;
-}
-
-.menu .logo {
-  width: 175px;
-  height: auto;
-}
-
-.logo {
-  width: 100px;
-}
-
-.login {
-  font-size: 1.5em;
-  text-transform: uppercase;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  border-radius: 50%;
-}
-
-#__BVID__17__BV_button_ > input[to="/usuario"] {
-  margin: 0;
-}
-
-.logado {
+header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 175px;
-  height: 40px;
+  width: 100%;
+  min-height: 75px;
+  box-shadow: 5px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.cabecalho {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cabecalho .logo img {
+  width: 200px;
+  max-height: 50px;
+}
+
+.cabecalho .login {
+  border-radius: 100%;
+}
+
+.cabecalho .login svg {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+}
+
+.cabecalho .logado {
+  max-height: 50px;
+  width: 200px;
+  padding: 10px;
+}
+
+.dropdown-lista {
+  position: absolute;
+  z-index: 999;
   padding: 0;
-  border-radius: 5px;
 }
 
-.logado span {
-  font-size: 1em;
+.dropdown-lista li {
+  list-style: none;
 }
 
-.logado svg {
-  font-size: 1.25em;
-}
-
-.logado svg {
-  margin-right: 10px;
-}
-
-.deslogar {
-  color: #87f;
-}
-.deslogar svg {
-  margin-left: 10px;
+.dropdown-lista a,
+.dropdown-lista button {
+  display: flex;
+  width: 200px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
 }
 </style>

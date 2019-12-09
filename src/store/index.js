@@ -18,7 +18,8 @@ export default new Vuex.Store({
       cep: "",
       cidade: "",
       estado: ""
-    }
+    },
+    usuarioProduto: null
   },
   mutations: {
     UPDATE_LOGIN(state, payload) {
@@ -26,6 +27,12 @@ export default new Vuex.Store({
     },
     UPDATE_USUARIO(state, payload) {
       state.usuario = Object.assign(state.usuario, payload);
+    },
+    UPDATE_USUARIO_PRODUTO(state, payload) {
+      state.usuarioProduto = payload;
+    },
+    ADD_USUARIO_PRODUTO(state, payload) {
+      state.usuarioProduto.unshift(payload);
     }
   },
   actions: {
@@ -34,6 +41,13 @@ export default new Vuex.Store({
         context.commit("UPDATE_USUARIO", response.data);
         context.commit("UPDATE_LOGIN", true);
       });
+    },
+    getUsuarioProduto(context) {
+      api
+        .get(`/produtos?usuario_id=${context.state.usuario.id}`)
+        .then(response => {
+          context.commit("UPDATE_USUARIO_PRODUTO", response.data);
+        });
     },
     cadastrarUsuario(context, payload) {
       context.commit("UPDATE_USUARIO", { id: payload.email });
