@@ -34,7 +34,8 @@ export default {
         produto: "",
         preco: "",
         descricao: "",
-        foto: ""
+        foto: "",
+        vendido: "false"
       },
       adicionar: false
     };

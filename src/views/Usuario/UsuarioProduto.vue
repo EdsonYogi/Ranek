@@ -5,7 +5,7 @@
       <h2>Seus Produtos</h2>
       <transition-group class="row" v-if="usuarioProduto" name="list" tag="ul">
         <li class="col-lg-6" v-for="(produto) in usuarioProduto" :key="produto.id">
-          <button class="deletar-produto ml-auto" @click.prevent="deletarProduto(produto.id)">
+          <button class="deletar-produto ml-auto" @click="deletarProduto(produto.id)">
             <font-awesome-icon icon="minus-square" />
           </button>
           <ProdutoItem :produto="produto" />

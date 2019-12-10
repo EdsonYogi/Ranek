@@ -1,16 +1,27 @@
 <template>
   <section class="produto">
     <div class="container">
-      <div class="row" v-if="produto" key="produto">
-        <div class="col-md-6 col-12">
-          <div class="img"></div>
+      <div v-if="produto">
+        <div class="row">
+          <div class="informacoes col-md-6 col-12">
+            <h1>{{produto.produto}}</h1>
+            <span>{{produto.preco | conversaoPreco}}</span>
+            <p class="my-4">{{produto.descricao}}</p>
+            <button
+              type="button"
+              class="btn btn-ranek btn-lg"
+              @click="finalizar = !finalizar"
+              v-if="!finalizar"
+            >Comprar</button>
+            <button type="button" class="btn btn-ranek btn-lg" disabled v-else>Produto Vendido</button>
+          </div>
+          <div class="col-md-6 col-12">
+            <div class="img"></div>
+          </div>
         </div>
-        <div class="informacoes col-md-6 col-12">
-          <h1>{{produto.produto}}</h1>
-          <span>{{produto.preco | conversaoPreco}}</span>
-          <p class="my-4">{{produto.descricao}}</p>
-          <button type="button" class="btn btn-ranek btn-lg">Comprar</button>
-        </div>
+        <transition mode="out-in" v-if="finalizar">
+          <FinalizarCompra :produto="produto" />
+        </transition>
       </div>
       <div class="row align-items-center" v-else key="loading-produtos">
         <Loading />
@@ -21,14 +32,19 @@
 
 <script>
 import { api } from "@/services/services.js";
+import FinalizarCompra from "@/components/FinalizarCompra.vue";
 
 export default {
   name: "produto",
   props: ["id"],
   data() {
     return {
-      produto: ""
+      produto: "",
+      finalizar: false
     };
+  },
+  components: {
+    FinalizarCompra
   },
   methods: {
     getProdutos() {
@@ -45,7 +61,7 @@ export default {
 
 <style scoped>
 .produto {
-  height: calc(100vh - 125px);
+  min-height: calc(100vh - 125px);
   display: flex;
   align-items: center;
 }
